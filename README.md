@@ -4,13 +4,13 @@ This repository corresponds to the resume project titled:
 
 > **Zynq SoC Smart Security Camera (RTL + AXI Video Pipeline)**
 
-It contains my **SystemVerilog RTL implementation** of an **AXI4-Stream image sharpening kernel** and the integration artifacts used to plug the kernel into an existing Zynq video pipeline.
+It contains my **Verilog RTL implementation** of an **AXI4-Stream image sharpening kernel** and the integration artifacts used to plug the kernel into an existing Zynq video pipeline.
 
 ---
 
 ## My Contribution (What I Actually Did)
 
-- Designed and implemented the **RTL sharpening kernel** (SystemVerilog)
+- Designed and implemented the **RTL sharpening kernel** (verilog)
 - Ensured **AXI4-Stream handshake correctness** (ready/valid backpressure) and **sideband alignment** (`tuser` / `tlast`)
 - Integrated the kernel into an **existing Vivado block diagram**
   (the base block diagram was reused from a prior project)
@@ -140,7 +140,7 @@ using a simple AXI4-Stream testbench with any standard simulator
 If you arrived here from my resume, this repository corresponds to:
 
 > **Zynq SoC Smart Security Camera (RTL + AXI Video Pipeline)**  
-> Custom SystemVerilog AXI4-Stream sharpening kernel
+> Custom verilog AXI4-Stream sharpening kernel
 
 ---
 
