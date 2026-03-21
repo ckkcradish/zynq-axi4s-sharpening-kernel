@@ -35,8 +35,8 @@ reg [1:0] state, next_state;
 parameter WAIT=2'b00, EDGE=2'b10;
 
 always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) state <= #1 WAIT;
-    else state <= #1 next_state;
+    if (!rst_n) state <=  WAIT;
+    else state <=  next_state;
 end
 
 wire kick_edge;
@@ -70,40 +70,40 @@ wire stall;
 assign stall = ~m_axis_tready;
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        edge_vert_cnt <= #1 0;
-        r0_s_axis_tvalid <= #1 1'b0;
-        r0_s_axis_tuser <= #1 1'b0;
-        r0_s_axis_tlast <= #1 1'b0;
-		r0_org_pixels <= #1 0;
+        edge_vert_cnt <=  0;
+        r0_s_axis_tvalid <=  1'b0;
+        r0_s_axis_tuser <= 1'b0;
+        r0_s_axis_tlast <= 1'b0;
+		r0_org_pixels <=  0;
         for (i=0; i<IN_HORZ_SIZE*2+3; i = i+1) begin
-            st_buf[i] <= #1 8'hff;
+            st_buf[i] <=  8'hff;
         end
     end else begin
         case (state)
             WAIT: begin
                 if (kick_edge) begin
-                    edge_vert_cnt <= #1 0;
-                    r0_s_axis_tvalid <= #1 s_axis_tvalid;
-                    r0_s_axis_tuser <= #1 s_axis_tuser;
-                    r0_s_axis_tlast <= #1 s_axis_tlast;
+                    edge_vert_cnt <=  0;
+                    r0_s_axis_tvalid <=  s_axis_tvalid;
+                    r0_s_axis_tuser <=  s_axis_tuser;
+                    r0_s_axis_tlast <=  s_axis_tlast;
                 end else begin
-                    edge_vert_cnt <= #1 0;
-                    r0_s_axis_tvalid <= #1 1'b0;
-                    r0_s_axis_tuser <= #1 1'b0;
-                    r0_s_axis_tlast <= #1 1'b0;
+                    edge_vert_cnt <= 0;
+                    r0_s_axis_tvalid <=  1'b0;
+                    r0_s_axis_tuser <=  1'b0;
+                    r0_s_axis_tlast <=  1'b0;
                 end
             end
             EDGE: begin
-                r0_s_axis_tvalid <= #1 s_axis_tvalid;
+                r0_s_axis_tvalid <=  s_axis_tvalid;
                 if (!stall & s_axis_tvalid) begin
-                    st_buf[0] <= #1 s_axis_tdata;
+                    st_buf[0] <=  s_axis_tdata;
                     for (i=0; i<IN_HORZ_SIZE*2+2; i = i+1) begin
-                        st_buf[i+1] <= #1 st_buf[i];
+                        st_buf[i+1] <=  st_buf[i];
                     end
-                    r0_s_axis_tuser <= #1 s_axis_tuser;
-                    r0_s_axis_tlast <= #1 s_axis_tlast;
-                    edge_vert_cnt <= #1 (s_axis_tvalid & s_axis_tlast) ? edge_vert_cnt + 1 : edge_vert_cnt;
-					r0_org_pixels <= #1 in_org_pixels;
+                    r0_s_axis_tuser <=  s_axis_tuser;
+                    r0_s_axis_tlast <= s_axis_tlast;
+                    edge_vert_cnt <=  (s_axis_tvalid & s_axis_tlast) ? edge_vert_cnt + 1 : edge_vert_cnt;
+					r0_org_pixels <=  in_org_pixels;
                 end
             end
         endcase
