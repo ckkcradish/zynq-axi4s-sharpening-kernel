@@ -8,7 +8,7 @@ It contains my **Verilog RTL implementation** of an **AXI4-Stream image sharpeni
 
 ---
 
-## My Contribution (What I Actually Did)
+## My Contribution
 
 - Designed and implemented the **RTL sharpening kernel** (verilog)
 - Ensured **AXI4-Stream handshake correctness** (ready/valid backpressure) and **sideband alignment** (`tuser` / `tlast`)
@@ -22,7 +22,7 @@ It contains my **Verilog RTL implementation** of an **AXI4-Stream image sharpeni
 
 ## Repository Contents
 
-- `sharpening_detect_hw.sv`  
+- `sharpening_hw.sv`  
   Top-level module that wires the sharpening datapath and maintains AXI4-Stream behavior.
 
 - `intensity_kernel.sv`  
@@ -36,8 +36,6 @@ It contains my **Verilog RTL implementation** of an **AXI4-Stream image sharpeni
 
 - `block_diagram.pdf`  
   Vivado IP Integrator block diagram snapshot for reference and interview discussion.
-
-(If filenames differ in your final repo, update this list to match.)
 
 ---
 
