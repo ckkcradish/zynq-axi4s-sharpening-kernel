@@ -67,79 +67,79 @@ assign stall = ~m_axis_tready;
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         /*** 1st Pipeline Register ***/
-        r0_pxl_r <= #1 0;
-        r0_pxl_g <= #1 0;
-        r0_pxl_b <= #1 0;
-        r0_s_axis_tvalid <= #1 0;
-        r0_s_axis_tuser <= #1 0;
-        r0_s_axis_tlast <= #1 0;
-		r0_org_pixels <= #1 0;
+        r0_pxl_r <=  0;
+        r0_pxl_g <=  0;
+        r0_pxl_b <=  0;
+        r0_s_axis_tvalid <=  0;
+        r0_s_axis_tuser <=  0;
+        r0_s_axis_tlast <=  0;
+		r0_org_pixels <=  0;
         /*** 2nd Pipeline Register ***/
-        r1_pxl_r <= #1 0;
-        r1_pxl_g <= #1 0;
-        r1_pxl_b <= #1 0;
-        r1_s_axis_tvalid <= #1 0;
-        r1_s_axis_tuser <= #1 0;
-        r1_s_axis_tlast <= #1 0;
-		r1_org_pixels <= #1 0;
+        r1_pxl_r <=  0;
+        r1_pxl_g <=  0;
+        r1_pxl_b <=  0;
+        r1_s_axis_tvalid <=  0;
+        r1_s_axis_tuser <=  0;
+        r1_s_axis_tlast <=  0;
+		r1_org_pixels <=  0;
         /*** 3rd Pipeline Register ***/
-        s2_pxl_rg <= #1 0;
-        p2_pxl_b  <= #1 0;
-        r2_s_axis_tvalid <= #1 0;
-        r2_s_axis_tuser <= #1 0;
-        r2_s_axis_tlast <= #1 0;
-		r2_org_pixels <= #1 0;
+        s2_pxl_rg <=  0;
+        p2_pxl_b  <=  0;
+        r2_s_axis_tvalid <=  0;
+        r2_s_axis_tuser <=  0;
+        r2_s_axis_tlast <=  0;
+		r2_org_pixels <=  0;
         /*** 4th Pipeline Register ***/
-        s3_pxl_rgb <= #1 0;
-        r3_s_axis_tvalid <= #1 0;
-        r3_s_axis_tuser <= #1 0;
-        r3_s_axis_tlast <= #1 0;
-		r3_org_pixels <= #1 0;
+        s3_pxl_rgb <=  0;
+        r3_s_axis_tvalid <=  0;
+        r3_s_axis_tuser <=  0;
+        r3_s_axis_tlast <=  0;
+		r3_org_pixels <=  0;
         /*** 5th Pipeline Regsiter ***/
-        r4_pxl_intense <= #1 0;
-        r4_s_axis_tvalid <= #1 0;
-        r4_s_axis_tuser <= #1 0;
-        r4_s_axis_tlast <= #1 0;
-		r4_org_pixels <= #1 0;
+        r4_pxl_intense <=  0;
+        r4_s_axis_tvalid <=  0;
+        r4_s_axis_tuser <=  0;
+        r4_s_axis_tlast <=  0;
+		r4_org_pixels <=  0;
         /*** Counting the vertial line ***/
-        vert_cnt <= #1 0;
+        vert_cnt <=  0;
     end else begin
         /*** 1st pipeline ***/
-        r0_pxl_r <= #1 pxl_r;
-        r0_pxl_g <= #1 pxl_g;
-        r0_pxl_b <= #1 pxl_b;
-        r0_s_axis_tvalid <= #1 s_axis_tvalid;
-        r0_s_axis_tuser <= #1 s_axis_tuser;
-        r0_s_axis_tlast <= #1 s_axis_tlast;
-		r0_org_pixels <= #1 s_axis_tdata;
+        r0_pxl_r <=  pxl_r;
+        r0_pxl_g <=  pxl_g;
+        r0_pxl_b <=  pxl_b;
+        r0_s_axis_tvalid <=  s_axis_tvalid;
+        r0_s_axis_tuser <=  s_axis_tuser;
+        r0_s_axis_tlast <=  s_axis_tlast;
+		r0_org_pixels <= s_axis_tdata;
         /*** 2nd pipeline ***/
-        r1_pxl_r <= #1 r0_pxl_r * 8'd77;
-        r1_pxl_g <= #1 r0_pxl_g * 8'd151;
-        r1_pxl_b <= #1 r0_pxl_b * 8'd28;
-        r1_s_axis_tvalid <= #1 r0_s_axis_tvalid;
-        r1_s_axis_tuser <= #1 r0_s_axis_tuser;
-        r1_s_axis_tlast <= #1 r0_s_axis_tlast;
-		r1_org_pixels <= #1 r0_org_pixels;
+        r1_pxl_r <=  r0_pxl_r * 8'd77;
+        r1_pxl_g <=  r0_pxl_g * 8'd151;
+        r1_pxl_b <=  r0_pxl_b * 8'd28;
+        r1_s_axis_tvalid <=  r0_s_axis_tvalid;
+        r1_s_axis_tuser <=  r0_s_axis_tuser;
+        r1_s_axis_tlast <=  r0_s_axis_tlast;
+		r1_org_pixels <=  r0_org_pixels;
         /*** 3rd pipeline ***/
-        s2_pxl_rg <= #1 r1_pxl_r + r1_pxl_g;
-        p2_pxl_b  <= #1 r1_pxl_b;
-        r2_s_axis_tvalid <= #1 r1_s_axis_tvalid;
-        r2_s_axis_tuser <= #1 r1_s_axis_tuser;
-        r2_s_axis_tlast <= #1 r1_s_axis_tlast;
-		r2_org_pixels <= #1 r1_org_pixels;
+        s2_pxl_rg <=  r1_pxl_r + r1_pxl_g;
+        p2_pxl_b  <=  r1_pxl_b;
+        r2_s_axis_tvalid <=  r1_s_axis_tvalid;
+        r2_s_axis_tuser <=  r1_s_axis_tuser;
+        r2_s_axis_tlast <=  r1_s_axis_tlast;
+		r2_org_pixels <=  r1_org_pixels;
         /*** 4th pipeline ***/
-        s3_pxl_rgb <= #1 s2_pxl_rg + p2_pxl_b;
-        r3_s_axis_tvalid <= #1 r2_s_axis_tvalid;
-        r3_s_axis_tuser <= #1 r2_s_axis_tuser;
-        r3_s_axis_tlast <= #1 r2_s_axis_tlast;
-		r3_org_pixels <= #1 r2_org_pixels;
+        s3_pxl_rgb <=  s2_pxl_rg + p2_pxl_b;
+        r3_s_axis_tvalid <=  r2_s_axis_tvalid;
+        r3_s_axis_tuser <=  r2_s_axis_tuser;
+        r3_s_axis_tlast <=  r2_s_axis_tlast;
+		r3_org_pixels <=  r2_org_pixels;
         /*** 5th pipeline ***/
-        r4_pxl_intense <= #1 s3_pxl_rgb >> 8;
-        r4_s_axis_tvalid <= #1 r3_s_axis_tvalid;
-        r4_s_axis_tuser <= #1 r3_s_axis_tuser;
-        r4_s_axis_tlast <= #1 r3_s_axis_tlast;
-        vert_cnt <= #1 (r4_s_axis_tvalid & r4_s_axis_tlast) ? vert_cnt + 1 : vert_cnt;
-		r4_org_pixels <= #1 r3_org_pixels;
+        r4_pxl_intense <=  s3_pxl_rgb >> 8;
+        r4_s_axis_tvalid <=  r3_s_axis_tvalid;
+        r4_s_axis_tuser <=  r3_s_axis_tuser;
+        r4_s_axis_tlast <=  r3_s_axis_tlast;
+        vert_cnt <=  (r4_s_axis_tvalid & r4_s_axis_tlast) ? vert_cnt + 1 : vert_cnt;
+		r4_org_pixels <=  r3_org_pixels;
     end
 end
 
