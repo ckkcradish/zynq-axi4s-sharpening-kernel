@@ -58,7 +58,7 @@ The sharpening block is a fully streaming RTL module that:
 
 - Converts incoming RGB pixels to a grayscale intensity value using fixed-point weights:
 
-  **Y = 77·R + 151·G + 28·B**
+  **Y = (77·R + 151·G + 28·B)/256**
 
 - Implemented as a multi-stage pipelined datapath
 - Forwards both:
